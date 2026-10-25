@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c4gdpworhmyqv"]
+
+[ext_resource type="Script" uid="uid://du1t471i7prdw" path="res://scripts/player.gd" id="1_im37l"]
+[ext_resource type="SpriteFrames" uid="uid://ckhmwydioh2n8" path="res://sprites/altmane_walk_frames.tres" id="2_walk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4adyp"]
+size = Vector2(12, 16)
+
+[node name="TestRoom" type="Node2D" unique_id=1163504213]
+
+[node name="Background" type="ColorRect" parent="." unique_id=798367197]
+offset_left = -15.0
+offset_top = 36.0
+offset_right = 305.0
+offset_bottom = 216.0
+color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=744972416]
+position = Vector2(160, 90)
+motion_mode = 1
+script = ExtResource("1_im37l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=599743250]
+texture_filter = 1
+position = Vector2(-20, 29)
+sprite_frames = ExtResource("2_walk")
+animation = &"walk_down"
+centered = false
+offset = Vector2(-12, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1669386922]
+position = Vector2(-20, 28)
+shape = SubResource("RectangleShape2D_4adyp")

@@ -1,0 +1,744 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://qp8dym4ud7ce" path="res://garage_bg_lit.png" id="bg"]
+[ext_resource type="Texture2D" path="res://garage_lights.png" id="lights"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/floor.png" id="floor"]
+[ext_resource type="Script" path="res://scripts/player_3d.gd" id="player_script"]
+[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="camera_script"]
+[ext_resource type="SpriteFrames" uid="uid://ckhmwydioh2n8" path="res://sprites/altmane_walk_frames.tres" id="walk"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/wall_top.png" id="wall_top"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/side_wall.png" id="side_wall"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/floor_front.png" id="floor_front"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/wall.png" id="wall"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/wall_lights.png" id="wall_lights"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/props_atlas.png" id="props_atlas"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/lamp.png" id="lamp"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/plant_leaves.png" id="plant_leaves"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/globe.png" id="globe"]
+[ext_resource type="Texture2D" path="res://art/garage_3d/shelf_plant.png" id="shelf_plant"]
+[ext_resource type="Script" path="res://scripts/pixel_box.gd" id="pixel_box"]
+
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.035, 0.02, 0.015, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.92, 0.85, 1)
+ambient_light_energy = 0.6
+glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.1
+glow_blend_mode = 2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="CameraAttributesPractical" id="cam_attr"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 26.0
+dof_blur_far_transition = 5.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 18.0
+dof_blur_near_transition = 3.0
+dof_blur_amount = 0.05
+
+[sub_resource type="FogMaterial" id="fog_mat"]
+density = 0.06
+edge_fade = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="dust_process"]
+emission_shape = 3
+emission_box_extents = Vector3(7.5, 2.0, 7.5)
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 0.03
+initial_velocity_max = 0.12
+gravity = Vector3(0, -0.02, 0)
+
+[sub_resource type="StandardMaterial3D" id="dust_mat"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.6)
+emission_enabled = true
+emission = Color(1, 0.85, 0.6, 1)
+emission_energy_multiplier = 2.0
+billboard_mode = 3
+
+[sub_resource type="QuadMesh" id="dust_mesh"]
+material = SubResource("dust_mat")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="BoxShape3D" id="player_shape"]
+size = Vector3(0.6, 1.6, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="ottoman_mat"]
+albedo_color = Color(0.45, 0.22, 0.13, 1)
+roughness = 1.0
+
+[sub_resource type="CylinderMesh" id="ottoman_mesh"]
+material = SubResource("ottoman_mat")
+top_radius = 0.62
+bottom_radius = 0.56
+height = 0.4
+radial_segments = 24
+rings = 1
+
+[sub_resource type="BoxShape3D" id="box_0"]
+size = Vector3(18, 2, 1)
+
+[sub_resource type="BoxShape3D" id="box_1"]
+size = Vector3(1.25, 2, 14.7386)
+
+[sub_resource type="BoxShape3D" id="box_2"]
+size = Vector3(1.25, 2, 14.7386)
+
+[sub_resource type="BoxShape3D" id="box_3"]
+size = Vector3(18, 2, 1)
+
+[sub_resource type="BoxShape3D" id="box_4"]
+size = Vector3(4.8, 2, 0.7071)
+
+[sub_resource type="BoxShape3D" id="box_5"]
+size = Vector3(1.2, 2, 0.7071)
+
+[sub_resource type="BoxShape3D" id="box_6"]
+size = Vector3(1.8, 2, 0.7071)
+
+[sub_resource type="BoxShape3D" id="box_7"]
+size = Vector3(1.6, 2, 0.7071)
+
+[sub_resource type="BoxShape3D" id="box_8"]
+size = Vector3(0.6, 2, 0.9899)
+
+[sub_resource type="BoxShape3D" id="box_9"]
+size = Vector3(1.35, 2, 0.7071)
+
+[sub_resource type="BoxShape3D" id="box_10"]
+size = Vector3(0.6, 2, 0.5657)
+
+[sub_resource type="BoxShape3D" id="box_11"]
+size = Vector3(3, 2, 1.2021)
+
+[sub_resource type="BoxShape3D" id="box_12"]
+size = Vector3(0.8, 2, 0.495)
+
+[sub_resource type="BoxShape3D" id="box_13"]
+size = Vector3(1.3, 2, 0.6364)
+
+[sub_resource type="BoxShape3D" id="box_14"]
+size = Vector3(1.7, 2, 1.6263)
+
+[sub_resource type="BoxShape3D" id="box_15"]
+size = Vector3(1.65, 2, 1.0607)
+
+[sub_resource type="BoxShape3D" id="box_16"]
+size = Vector3(0.85, 2, 0.495)
+
+[sub_resource type="BoxShape3D" id="box_17"]
+size = Vector3(1.7, 2, 1.6263)
+
+[sub_resource type="BoxShape3D" id="box_18"]
+size = Vector3(1.65, 2, 1.0607)
+
+[sub_resource type="BoxShape3D" id="box_19"]
+size = Vector3(0.85, 2, 0.495)
+
+[node name="Garage3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 1, 12.2, 23.5526)
+attributes = SubResource("cam_attr")
+fov = 25.0
+current = true
+script = ExtResource("camera_script")
+target = NodePath("../Player")
+limit_left = -2.0
+limit_right = 2.0
+limit_back = 22.0526
+limit_front = 28.5526
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Wall" type="Sprite3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 0, 2.3094, 0)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("wall")
+cast_shadow = 0
+
+[node name="WallLights" type="Sprite3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 0, 2.3094, 0.01)
+cast_shadow = 0
+modulate = Color(1.5, 1.5, 1.5, 1)
+pixel_size = 0.05
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("wall_lights")
+
+[node name="Floor" type="Sprite3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1.4142, 0, 0, 0, 3.5355)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("floor")
+cast_shadow = 0
+
+[node name="WallTop" type="Sprite3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 0, 6.8127, 0)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("wall_top")
+cast_shadow = 0
+
+[node name="SideWallLeft" type="Sprite3D" parent="Room"]
+transform = Transform3D(0, 0, 1, 0, 1.1547, 0, -1, 0, 0, -8, 4.0415, 9)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("side_wall")
+cast_shadow = 0
+
+[node name="SideWallRight" type="Sprite3D" parent="Room"]
+transform = Transform3D(0, 0, -1, 0, 1.1547, 0, 1, 0, 0, 8, 4.0415, 9)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("side_wall")
+cast_shadow = 0
+flip_h = true
+
+[node name="FloorFront" type="Sprite3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1.4142, 0, 0, 0, 12.5511)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("floor_front")
+cast_shadow = 0
+
+[node name="Furniture" type="Node3D" parent="."]
+
+[node name="ComputerDesk" type="Node3D" parent="Furniture"]
+
+[node name="Desk" type="MeshInstance3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.175, 0, 0.7071)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(135, 71, 97, 19)
+top_rect = Rect2i(135, 63, 97, 8)
+depth = 0.5657
+
+[node name="Monitor" type="MeshInstance3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 1.097, 0.4243)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(145, 41, 33, 26)
+top_rect = Rect2i(145, 42, 33, 1)
+depth = 0.4
+
+[node name="MonitorScreen" type="Sprite3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 0.075, 1.8475, 0.4343)
+cast_shadow = 0
+modulate = Color(1.5, 1.5, 1.5, 1)
+pixel_size = 0.05
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("lights")
+region_enabled = true
+region_rect = Rect2(145, 41, 33, 26)
+
+[node name="Disks" type="MeshInstance3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 1.097, 0.1414)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(137, 55, 8, 8)
+top_rect = Rect2i(137, 54, 8, 1)
+depth = 0.12
+
+[node name="SodaCan" type="MeshInstance3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.475, 1.097, 0.5657)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(207, 62, 5, 7)
+top_rect = Rect2i(207, 61, 5, 1)
+depth = 0.2
+
+[node name="Lamp" type="Sprite3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 2.925, 1.9053, 0.495)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("lamp")
+
+[node name="LampBulb" type="Sprite3D" parent="Furniture/ComputerDesk"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 2.925, 1.9053, 0.505)
+cast_shadow = 0
+modulate = Color(1.5, 1.5, 1.5, 1)
+pixel_size = 0.05
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("lights")
+region_enabled = true
+region_rect = Rect2(206, 40, 25, 28)
+
+[node name="Chair" type="Node3D" parent="Furniture"]
+
+[node name="Seat" type="MeshInstance3D" parent="Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 0.308, 1.65)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(153, 93, 27, 5)
+depth = 0.45
+
+[node name="Backrest" type="MeshInstance3D" parent="Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 0.5967, 1.65)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(156, 79, 21, 14)
+depth = 0.1
+
+[node name="Pole" type="MeshInstance3D" parent="Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 0, 1.45)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(165, 98, 3, 5)
+depth = 0.1
+
+[node name="BaseSideways" type="MeshInstance3D" parent="Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 0, 1.46)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(156, 103, 21, 2)
+depth = 0.12
+
+[node name="BaseFrontBack" type="MeshInstance3D" parent="Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 0, 1.85)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(165, 103, 3, 2)
+depth = 0.9
+
+[node name="Plant" type="Node3D" parent="Furniture"]
+
+[node name="Pot" type="MeshInstance3D" parent="Furniture/Plant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 0, 0.9192)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(234, 83, 10, 10)
+top_rect = Rect2i(234, 80, 10, 3)
+depth = 0.45
+
+[node name="Leaves1" type="Sprite3D" parent="Furniture/Plant"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 3.95, 1.3503, 0.6992)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("plant_leaves")
+
+[node name="Leaves2" type="Sprite3D" parent="Furniture/Plant"]
+transform = Transform3D(0.5, 0, 0.866, 0, 1.1547, 0, -0.866, 0, 0.5, 3.95, 1.3503, 0.6992)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("plant_leaves")
+
+[node name="Leaves3" type="Sprite3D" parent="Furniture/Plant"]
+transform = Transform3D(0.5, 0, -0.866, 0, 1.1547, 0, 0.866, 0, 0.5, 3.95, 1.3503, 0.6992)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("plant_leaves")
+
+[node name="Bookshelves" type="Node3D" parent="Furniture"]
+
+[node name="ShelfLeft" type="MeshInstance3D" parent="Furniture/Bookshelves"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.025, 0, 0.6364)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(243, 37, 35, 52)
+top_rect = Rect2i(243, 31, 35, 6)
+depth = 0.4243
+
+[node name="Globe" type="Sprite3D" parent="Furniture/Bookshelves"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 4.975, 3.3775, 0.4243)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("globe")
+
+[node name="ShelfRight" type="MeshInstance3D" parent="Furniture/Bookshelves"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 0, 0.6364)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(280, 54, 32, 35)
+top_rect = Rect2i(280, 50, 32, 4)
+depth = 0.4243
+
+[node name="Radio" type="MeshInstance3D" parent="Furniture/Bookshelves"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.575, 2.0207, 0.3536)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(283, 42, 17, 8)
+top_rect = Rect2i(283, 43, 17, 1)
+depth = 0.25
+
+[node name="ShelfPlant" type="Sprite3D" parent="Furniture/Bookshelves"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 7.25, 2.4249, 0.4243)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("shelf_plant")
+
+[node name="WallBox" type="MeshInstance3D" parent="Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.65, 0, 0.6364)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(95, 63, 24, 26)
+top_rect = Rect2i(95, 64, 24, 1)
+depth = 0.35
+
+[node name="TrashCan" type="MeshInstance3D" parent="Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 1.1314)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(120, 77, 12, 19)
+top_rect = Rect2i(120, 78, 12, 1)
+depth = 0.45
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Workbench" type="Node3D" parent="Props"]
+
+[node name="Top" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.275, 0.7506, 3.1113)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(25, 107, 59, 4)
+top_rect = Rect2i(25, 99, 59, 8)
+depth = 0.5657
+
+[node name="LegFrontLeft" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55, 0, 3.1113)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(27, 111, 4, 13)
+depth = 0.15
+
+[node name="LegFrontRight" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3.1113)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(78, 111, 4, 13)
+depth = 0.15
+
+[node name="LegBackLeft" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55, 0, 2.6956)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(27, 111, 4, 13)
+depth = 0.15
+
+[node name="LegBackRight" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2.6956)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(78, 111, 4, 13)
+depth = 0.15
+
+[node name="Book" type="MeshInstance3D" parent="Props/Workbench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.275, 0.9815, 3.0406)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(50, 98, 9, 8)
+top_rect = Rect2i(50, 96, 9, 2)
+depth = 0.15
+
+[node name="Stool" type="Node3D" parent="Props"]
+
+[node name="Seat" type="MeshInstance3D" parent="Props/Stool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.325, 0.3464, 4.1719)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(46, 131, 15, 2)
+top_rect = Rect2i(46, 128, 15, 3)
+depth = 0.2121
+
+[node name="LegFrontLeft" type="MeshInstance3D" parent="Props/Stool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55, 0, 4.1719)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(48, 133, 2, 6)
+depth = 0.06
+
+[node name="LegFrontRight" type="MeshInstance3D" parent="Props/Stool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 4.1719)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(57, 133, 2, 6)
+depth = 0.06
+
+[node name="LegBackLeft" type="MeshInstance3D" parent="Props/Stool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55, 0, 4.0198)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(48, 133, 2, 6)
+depth = 0.06
+
+[node name="LegBackRight" type="MeshInstance3D" parent="Props/Stool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, 4.0198)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(57, 133, 2, 6)
+depth = 0.06
+
+[node name="Ottoman" type="Node3D" parent="Props"]
+
+[node name="Ottoman" type="MeshInstance3D" parent="Props/Ottoman"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6, 6.75, 0.2, 2.7393)
+mesh = SubResource("ottoman_mesh")
+
+[node name="BoxStack" type="Node3D" parent="Props"]
+
+[node name="BottomBox" type="MeshInstance3D" parent="Props/BoxStack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.725, 0, 9.6874)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(9, 147, 33, 25)
+top_rect = Rect2i(9, 139, 33, 8)
+depth = 0.5657
+
+[node name="TopBox" type="MeshInstance3D" parent="Props/BoxStack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.775, 1.4434, 9.5674)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(13, 132, 23, 9)
+top_rect = Rect2i(13, 126, 23, 6)
+depth = 0.4
+
+[node name="Crate" type="Node3D" parent="Props"]
+
+[node name="Crate" type="MeshInstance3D" parent="Props/Crate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1, 0, 9.4752)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(266, 141, 32, 23)
+top_rect = Rect2i(267, 138, 30, 3)
+depth = 0.5
+
+[node name="BookPile" type="Node3D" parent="Props"]
+
+[node name="Books" type="MeshInstance3D" parent="Props/BookPile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 8.2731)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(243, 154, 16, 11)
+top_rect = Rect2i(243, 153, 16, 1)
+depth = 0.35
+
+[node name="BoxStack2" type="Node3D" parent="Props"]
+
+[node name="BottomBox" type="MeshInstance3D" parent="Props/BoxStack2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.475, 0, 12.1622)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(9, 147, 33, 25)
+top_rect = Rect2i(9, 139, 33, 8)
+depth = 0.5657
+flip = true
+
+[node name="TopBox" type="MeshInstance3D" parent="Props/BoxStack2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.525, 1.4434, 12.0422)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(13, 132, 23, 9)
+top_rect = Rect2i(13, 126, 23, 6)
+depth = 0.4
+flip = true
+
+[node name="Crate2" type="Node3D" parent="Props"]
+
+[node name="Crate" type="MeshInstance3D" parent="Props/Crate2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 0, 12.1622)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(266, 141, 32, 23)
+top_rect = Rect2i(267, 138, 30, 3)
+depth = 0.5
+flip = true
+
+[node name="BookPile2" type="Node3D" parent="Props"]
+
+[node name="Books" type="MeshInstance3D" parent="Props/BookPile2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95, 0, 10.9602)
+script = ExtResource("pixel_box")
+texture = ExtResource("props_atlas")
+front_rect = Rect2i(243, 154, 16, 11)
+top_rect = Rect2i(243, 153, 16, 1)
+depth = 0.35
+flip = true
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="HangingBulb" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 2.9445, 0.5)
+light_color = Color(1, 0.82, 0.6, 1)
+light_energy = 1.2
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="MonitorGlow" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 1.4434, 0.75)
+light_color = Color(0.55, 1, 0.8, 1)
+light_energy = 0.8
+shadow_enabled = false
+omni_range = 3.5
+
+[node name="DeskLamp" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 1.7321, 0.62)
+light_color = Color(1, 0.75, 0.45, 1)
+light_energy = 1.5
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="FrontFill" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 9.5)
+light_color = Color(1, 0.85, 0.65, 1)
+light_energy = 0.7
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="WindowLight" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866, 0, -0.866, -0.5, -4.7, 3.5796, 0.3)
+light_color = Color(1, 0.85, 0.65, 1)
+light_energy = 2.0
+light_volumetric_fog_energy = 8.0
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 40.0
+
+[node name="RoomHaze" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3094, 7.3693)
+size = Vector3(14, 4.6188, 14.7386)
+material = SubResource("fog_mat")
+
+[node name="Dust" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3094, 7.3693)
+amount = 80
+lifetime = 12.0
+preprocess = 12.0
+visibility_aabb = AABB(-8, -3, -7, 16, 6, 14)
+process_material = SubResource("dust_process")
+draw_pass_1 = SubResource("dust_mesh")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+
+[node name="BackWall" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+shape = SubResource("box_0")
+
+[node name="LeftWall" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.375, 1, 7.3693)
+shape = SubResource("box_1")
+
+[node name="RightWall" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.375, 1, 7.3693)
+shape = SubResource("box_2")
+
+[node name="FrontWall" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15.2386)
+shape = SubResource("box_3")
+
+[node name="ComputerDesk" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 1, 0.3536)
+shape = SubResource("box_4")
+
+[node name="WallBox" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.65, 1, 0.3536)
+shape = SubResource("box_5")
+
+[node name="BookshelfLeft" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05, 1, 0.3536)
+shape = SubResource("box_6")
+
+[node name="BookshelfRight" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 1, 0.3536)
+shape = SubResource("box_7")
+
+[node name="Plant" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.95, 1, 0.495)
+shape = SubResource("box_8")
+
+[node name="Chair" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325, 1, 1.5556)
+shape = SubResource("box_9")
+
+[node name="TrashCan" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 1, 0.8485)
+shape = SubResource("box_10")
+
+[node name="Workbench" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25, 1, 2.5809)
+shape = SubResource("box_11")
+
+[node name="Stool" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 1, 3.9952)
+shape = SubResource("box_12")
+
+[node name="Ottoman" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 1, 2.8638)
+shape = SubResource("box_13")
+
+[node name="BoxStack" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7, 1, 8.9449)
+shape = SubResource("box_14")
+
+[node name="Crate" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.125, 1, 9.0156)
+shape = SubResource("box_15")
+
+[node name="BookPile" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.325, 1, 8.0964)
+shape = SubResource("box_16")
+
+[node name="BoxStack2" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1, 11.4198)
+shape = SubResource("box_17")
+
+[node name="Crate2" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.875, 1, 11.7026)
+shape = SubResource("box_18")
+
+[node name="BookPile2" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.925, 1, 10.7834)
+shape = SubResource("box_19")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+motion_mode = 1
+script = ExtResource("player_script")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1.1547, 0, 0, 0, 1, 0, 0.9526, 0)
+pixel_size = 0.05
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("walk")
+animation = &"walk_down"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("player_shape")

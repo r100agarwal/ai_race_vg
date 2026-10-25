@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://bvs80r2mg1cgt"]
+
+[ext_resource type="Texture2D" uid="uid://qp8dym4ud7ce" path="res://garage_bg_lit.png" id="1_bg"]
+[ext_resource type="Texture2D" uid="uid://dy5h1qhnwlne1" path="res://garage_lights.png" id="2_6thhw"]
+[ext_resource type="Script" uid="uid://du1t471i7prdw" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="SpriteFrames" uid="uid://ckhmwydioh2n8" path="res://sprites/altmane_walk_frames.tres" id="3_walk"]
+
+[sub_resource type="RectangleShape2D" id="Rect_back_wall"]
+size = Vector2(320, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_side_wall"]
+size = Vector2(16, 180)
+
+[sub_resource type="RectangleShape2D" id="Rect_bottom_wall"]
+size = Vector2(320, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_computer_desk"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_workbench"]
+size = Vector2(60, 20)
+
+[sub_resource type="RectangleShape2D" id="Rect_bookshelf_left"]
+size = Vector2(36, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_bookshelf_right"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_wall_box"]
+size = Vector2(24, 16)
+
+[sub_resource type="RectangleShape2D" id="Rect_box_stack"]
+size = Vector2(34, 40)
+
+[sub_resource type="RectangleShape2D" id="Rect_crate"]
+size = Vector2(32, 24)
+
+[sub_resource type="RectangleShape2D" id="Rect_plant"]
+size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="Rect_player"]
+size = Vector2(12, 16)
+
+[sub_resource type="Environment" id="Environment_3yerp"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.1
+glow_blend_mode = 2
+glow_hdr_threshold = 0.75
+
+[node name="Garage" type="Node2D" unique_id=1860318201]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=916764089]
+texture_filter = 1
+texture = ExtResource("1_bg")
+centered = false
+
+[node name="Lights" type="Sprite2D" parent="." unique_id=353076600]
+self_modulate = Color(1.5, 1.5, 1.5, 1)
+texture_filter = 1
+texture = ExtResource("2_6thhw")
+centered = false
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1863222457]
+
+[node name="BackWall" type="CollisionShape2D" parent="Walls" unique_id=38875963]
+position = Vector2(159, 40)
+shape = SubResource("Rect_back_wall")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls" unique_id=585488461]
+position = Vector2(-3, 90)
+shape = SubResource("Rect_side_wall")
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls" unique_id=1621835367]
+position = Vector2(323, 90)
+shape = SubResource("Rect_side_wall")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls" unique_id=990087182]
+position = Vector2(160, 188)
+shape = SubResource("Rect_bottom_wall")
+
+[node name="Furniture" type="StaticBody2D" parent="." unique_id=846696526]
+
+[node name="ComputerDesk" type="CollisionShape2D" parent="Furniture" unique_id=732860944]
+position = Vector2(183, 82)
+shape = SubResource("Rect_computer_desk")
+
+[node name="Workbench" type="CollisionShape2D" parent="Furniture" unique_id=1431599675]
+position = Vector2(55, 114)
+shape = SubResource("Rect_workbench")
+
+[node name="BookshelfLeft" type="CollisionShape2D" parent="Furniture" unique_id=155662157]
+position = Vector2(261, 82)
+shape = SubResource("Rect_bookshelf_left")
+
+[node name="BookshelfRight" type="CollisionShape2D" parent="Furniture" unique_id=51452553]
+position = Vector2(296, 82)
+shape = SubResource("Rect_bookshelf_right")
+
+[node name="WallBox" type="CollisionShape2D" parent="Furniture" unique_id=528011127]
+position = Vector2(107, 82)
+shape = SubResource("Rect_wall_box")
+
+[node name="BoxStack" type="CollisionShape2D" parent="Furniture" unique_id=1838435728]
+position = Vector2(26, 152)
+shape = SubResource("Rect_box_stack")
+
+[node name="Crate" type="CollisionShape2D" parent="Furniture" unique_id=1500091460]
+position = Vector2(282, 152)
+shape = SubResource("Rect_crate")
+
+[node name="Plant" type="CollisionShape2D" parent="Furniture" unique_id=1767206300]
+position = Vector2(239, 87)
+shape = SubResource("Rect_plant")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=256488951]
+position = Vector2(180, 112)
+motion_mode = 1
+script = ExtResource("2_player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1335093882]
+texture_filter = 1
+position = Vector2(-20, 29)
+sprite_frames = ExtResource("3_walk")
+animation = &"walk_down"
+centered = false
+offset = Vector2(-12, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1642663230]
+position = Vector2(-20, 28)
+shape = SubResource("Rect_player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1779913295]
+environment = SubResource("Environment_3yerp")
